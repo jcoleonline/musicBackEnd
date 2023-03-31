@@ -1,0 +1,29 @@
+{
+  "name": "musicbackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcoleonline/musicBackEnd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcoleonline/musicBackEnd/issues"
+  },
+  "homepage": "https://github.com/jcoleonline/musicBackEnd#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-es6-template-engine": "^2.2.3",
+    "nodemon": "^2.0.22",
+    "pg": "^8.10.0",
+    "sequelize": "^6.30.0",
+    "sequelize-cli": "^6.6.0"
+  }
+}
