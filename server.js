@@ -127,11 +127,11 @@ app.get('/albums', async (req, res) => {
 });
 
 app.post('/albums', async (req, res) => {
-  const { name, year, artistid } = req.body;
+  const { name, year, artistId } = req.body;
   const newAlbum = await album.create({
     name,
     year,
-    artistid
+    artistId
   });
   res.json({
     id: newAlbum.id,
@@ -172,11 +172,14 @@ app.delete('/albums/:id', async (req, res) => {
 });
 
 
-app.get('/artists/albums', async (req, res) =>{  //<-- foreign key handler
-    const artistAlbum = await artist.findAll({
-        include: [{
-            model: album
-        }]
+app.get('/artists/albums/:id', async (req, res) =>{  //<-- foreign key handler
+    // const oneArtist = await artist.findByPk(req.params.id);
+    const artistAlbum = await album.findAll({
+        // include: [{
+        //     model: album,
+        //     attributes: ["name","year"]
+        // }]
+        where: {artistId:req.params.id}
     });
     res.json(artistAlbum);
 });

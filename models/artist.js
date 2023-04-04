@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       artist.hasMany(models.album, {
-        foreignKey: 'artistid'
+        // foreignKey: 'id'
       })
     }
   }

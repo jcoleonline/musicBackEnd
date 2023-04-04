@@ -6,7 +6,7 @@ module.exports = {
     await queryInterface.bulkInsert('albums', [{
       name: 'HOPE',
       year: '2023',
-      artistid: 1,
+      artistId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});

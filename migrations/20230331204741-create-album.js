@@ -18,14 +18,14 @@ module.exports = {
       year: {
         type: Sequelize.STRING
       },
-      artistid: {
+      artistId: {
         allowNull: false,
         type: DataTypes.INTEGER,
         onDelete: 'CASCADE',
         references: {
-          model: 'artist',
+          model: 'artists',
           key: 'id',
-          as: 'artistid'
+          as: 'artistId'
         }
       },
       createdAt: {

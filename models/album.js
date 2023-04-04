@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       album.belongsTo(models.artist, {
-        foreignKey: 'artistid',
+        // foreignKey: 'id',
         onDelete: 'CASCADE'
       })
     }
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   album.init({
     name: DataTypes.STRING,
     year: DataTypes.STRING,
-    artistid: DataTypes.INTEGER
+    artistId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'album',
