@@ -2,9 +2,8 @@ const http = require ('http')
 const hostname = '127.0.0.1';
 const port = 3000;
 const Sequelize = require('sequelize');
-const { user } = require('./models');
-const { artist } = require('./models');
-const { album } = require('./models');
+const { User, Artist, Album } = require('./models');
+
 
 const express = require('express');
 const app = express();
@@ -24,7 +23,7 @@ app.get('/', (req, res) => {
 
 app.post('/users', async (req, res) => {   //<-- creates new user
     const { username, email, password } = req.body;
-    const newUser = await user.create({
+    const newUser = await User.create({
         username,
         email,
         password
@@ -36,13 +35,13 @@ app.post('/users', async (req, res) => {   //<-- creates new user
 });
 
 app.get('/users', async (req, res) => {
-  const users = await user.findAll();
+  const users = await User.findAll();
   res.json(users);
 });
 
 app.get('/users/:id', async (req, res) => {  //<--- gets user by id
   try{
-    const oneUser = await user.findByPk(req.params.id);
+    const oneUser = await User.findByPk(req.params.id);
     res.json(oneUser);
   } catch (e) {
     console.log(e);
@@ -54,7 +53,7 @@ app.get('/users/:id', async (req, res) => {  //<--- gets user by id
 
 app.post('/users/:id', async (req, res) => { //<-- updates user by id
   const { id } = req.params;
-  const updatedUser = await user.update(req.body, {
+  const updatedUser = await User.update(req.body, {
     where: {
       id
     }
@@ -64,7 +63,7 @@ app.post('/users/:id', async (req, res) => { //<-- updates user by id
 
 app.delete('/users/:id', async (req, res) => {
   const { id } = req.params;
-  const deletedUser = await user.destroy({
+  const deletedUser = await User.destroy({
     where: {
       id
     }
@@ -73,13 +72,13 @@ app.delete('/users/:id', async (req, res) => {
 })
 
 app.get('/artists', async (req, res) => {
-  const artists = await artist.findAll();
+  const artists = await Artist.findAll();
   res.json(artists);
 });
 
 app.post('/artists', async (req, res) => {
   const { name, genre } = req.body;
-  const newArtist = await artist.create({
+  const newArtist = await Artist.create({
     name,
     genre
   });
@@ -91,7 +90,7 @@ app.post('/artists', async (req, res) => {
 
 app.get('/artists/:id', async (req, res) => {
   try{
-    const oneArtist = await artist.findByPk(req.params.id);
+    const oneArtist = await Artist.findByPk(req.params.id);
     res.json(oneArtist);
   } catch (e) {
     console.log(e);
@@ -103,7 +102,7 @@ app.get('/artists/:id', async (req, res) => {
 
 app.post('/artists/:id', async (req, res) => {
   const { id } = req.params;
-  const updatedArtist = await artist.update(req.body, {
+  const updatedArtist = await Artist.update(req.body, {
     where: {
       id
     }
@@ -113,7 +112,7 @@ app.post('/artists/:id', async (req, res) => {
 
 app.delete('/artists/:id', async (req, res) => {
   const { id } = req.params;
-  const deletedAritst = await artist.destroy({
+  const deletedAritst = await Artist.destroy({
     where: {
       id
     }
@@ -122,13 +121,13 @@ app.delete('/artists/:id', async (req, res) => {
 });
 
 app.get('/albums', async (req, res) => {
-  const albums = await album.findAll();
-  res.json(albums);
+  const Albums = await Album.findAll();
+  res.json(Albums);
 });
 
 app.post('/albums', async (req, res) => {
   const { name, year, artistId } = req.body;
-  const newAlbum = await album.create({
+  const newAlbum = await Album.create({
     name,
     year,
     artistId
@@ -141,7 +140,7 @@ app.post('/albums', async (req, res) => {
 
 app.get('/albums/:id', async (req, res) => {
   try{
-    const oneAlbum = await album.findByPk(req.params.id);
+    const oneAlbum = await Album.findByPk(req.params.id);
     res.json(oneAlbum);
   } catch (e) {
     console.log(e);
@@ -153,7 +152,7 @@ app.get('/albums/:id', async (req, res) => {
 
 app.post('/albums/:id', async (req, res) => {
   const { id } = req.params;
-  const updatedAlbum = await album.update(req.body, {
+  const updatedAlbum = await Album.update(req.body, {
     where: {
       id
     }
@@ -163,7 +162,7 @@ app.post('/albums/:id', async (req, res) => {
 
 app.delete('/albums/:id', async (req, res) => {
   const { id } = req.params;
-  const deletedAlbum = await album.destroy({
+  const deletedAlbum = await Album.destroy({
     where: {
       id
     }
@@ -172,14 +171,11 @@ app.delete('/albums/:id', async (req, res) => {
 });
 
 
-app.get('/artists/albums/:id', async (req, res) =>{  //<-- foreign key handler
-    // const oneArtist = await artist.findByPk(req.params.id);
-    const artistAlbum = await album.findAll({
-        // include: [{
-        //     model: album,
-        //     attributes: ["name","year"]
-        // }]
-        where: {artistId:req.params.id}
+app.get('/artists-albums', async (req, res) =>{  //<-- foreign key handler
+    const artistAlbum = await Artist.findAll({
+        include: [{
+            model: Album
+        }]
     });
     res.json(artistAlbum);
 });
