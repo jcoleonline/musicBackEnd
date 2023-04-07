@@ -21,17 +21,39 @@ app.get('/', (req, res) => {
   res.send('home');
 });
 
-app.post('/users', async (req, res) => {   //<-- creates new user
+app.post('/user-login', async (req, res) => {
+    const { username, password } = req.body;
+    const user = await User.findOne({
+      where: username
+    });
+
+    bcrypt.compare(password, user.password, (err, match) => {
+      if(match) {
+        req.session.user = user;
+        res.status(200).json('Success!');
+      } else {
+        res.json('not logged in!');
+      }
+    });
+    
+  
+})
+
+app.post('/user-register', async (req, res) => {   //<-- creates new user
+   try{
     const { username, email, password } = req.body;
     const newUser = await User.create({
-        username,
-        email,
-        password
+     username,
+     email,
+     password
     });
-    res.json({
-        id: newUser.id,
-        username: newUser.username,
+    res.json(newUser);
+   } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      message: 'user not created'
     });
+   }
 });
 
 app.get('/users', async (req, res) => {
@@ -183,4 +205,3 @@ app.get('/artists-albums', async (req, res) =>{  //<-- foreign key handler
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
   });
-
