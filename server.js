@@ -36,20 +36,22 @@ app.post('/users', async (req, res) => {   //<-- creates new user
 
 app.get('/users', async (req, res) => {
   const users = await User.findAll();
-  res.json(users);
+  res.render('user',{
+    locals: {
+        users
+    }
+});
 });
 
-app.get('/users/:id', async (req, res) => {  //<--- gets user by id
-  try{
+app.get('/users/:id', async (req, res) => {
     const oneUser = await User.findByPk(req.params.id);
-    res.json(oneUser);
-  } catch (e) {
-    console.log(e);
-    res.status(404).json({
-      message: 'User not found'
-    });
-  }
-});
+    // const username = db[oneUser].username
+    res.render("username",{
+      locals:{
+        oneUser
+      }
+    })
+  });
 
 app.post('/users/:id', async (req, res) => { //<-- updates user by id
   const { id } = req.params;
@@ -73,7 +75,11 @@ app.delete('/users/:id', async (req, res) => {
 
 app.get('/artists', async (req, res) => {
   const artists = await Artist.findAll();
-  res.json(artists);
+  res.render('artist',{
+    locals: {
+        artists
+    }
+});
 });
 
 app.post('/artists', async (req, res) => {
@@ -89,16 +95,13 @@ app.post('/artists', async (req, res) => {
 });
 
 app.get('/artists/:id', async (req, res) => {
-  try{
-    const oneArtist = await Artist.findByPk(req.params.id);
-    res.json(oneArtist);
-  } catch (e) {
-    console.log(e);
-    res.status(404).json({
-      message: 'Artist not found.'
-    });
-  }
-});
+      const oneArtist = await Artist.findByPk(req.params.id);
+    res.render("artistId",{
+      locals:{
+        oneArtist
+      }
+    })
+  });
 
 app.post('/artists/:id', async (req, res) => {
   const { id } = req.params;
@@ -122,7 +125,11 @@ app.delete('/artists/:id', async (req, res) => {
 
 app.get('/albums', async (req, res) => {
   const Albums = await Album.findAll();
-  res.json(Albums);
+  res.render('albums',{
+    locals: {
+        Albums
+    }
+});
 });
 
 app.post('/albums', async (req, res) => {
@@ -139,16 +146,13 @@ app.post('/albums', async (req, res) => {
 });
 
 app.get('/albums/:id', async (req, res) => {
-  try{
-    const oneAlbum = await Album.findByPk(req.params.id);
-    res.json(oneAlbum);
-  } catch (e) {
-    console.log(e);
-    res.status(404).json({
-      message: 'Album not found'
-    });
-  }
-});
+      const oneAlbum = await Album.findByPk(req.params.id);
+    res.render("albumsid",{
+      locals:{
+        oneAlbum
+      }
+    })
+  });
 
 app.post('/albums/:id', async (req, res) => {
   const { id } = req.params;
@@ -178,6 +182,14 @@ app.get('/artists-albums', async (req, res) =>{  //<-- foreign key handler
         }]
     });
     res.json(artistAlbum);
+});
+
+app.get('/login', async (req, res) => {
+  res.render('login')
+});
+
+app.get('/register', async (req, res) => {
+  res.render('register')
 });
 
 server.listen(port, hostname, () => {
