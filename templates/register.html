@@ -11,29 +11,29 @@
 </head>
 
 <body>
-    <nav class="nav">
-        <a class="nav-link active" aria-current="page" href="#">Active</a>
-        <a class="nav-link" href="#">Home</a>
-        <a class="nav-link" href="#">User</a>
-        <a class="nav-link" href="#">Albums</a>
-        <a class="nav-link" href="#">Artist</a>
+    <nav class="nav tophead">
+        <a class="nav-link" href="http://127.0.0.1:3000/">Home</a>
+        <a class="nav-link" href="http://127.0.0.1:3000/users">User</a>
+        <a class="nav-link" href="http://127.0.0.1:3000/albums">Albums</a>
+        <a class="nav-link" href="http://127.0.0.1:3000/artists">Artist</a>
+        <a class="nav-link" href="http://127.0.0.1:3000/login">Account</a>
     </nav>
 
     <div class="loginBox">
-        <form>
+        <form id="registerForm">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Username</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="username" class="form-control" id="username" aria-describedby="emailHelp">
                 <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
                 <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <input type="password" class="form-control" id="password">
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
@@ -44,7 +44,7 @@
             <a class="navbar-brand" href="#">ATLIENS</a>
         </div>
     </nav>
-
+<script src="/js/register.js"></script>
 </body>
 
 </html>
