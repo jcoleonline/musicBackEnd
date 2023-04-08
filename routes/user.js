@@ -7,7 +7,7 @@ const {User} = require("./../models");
 
 
 router.get("/", (req, res) => {
-    res.send("home");
+    res.render("home");
   });
 
 router.post("/user-login", async (req, res) => {
@@ -25,6 +25,7 @@ router.post("/user-login", async (req, res) => {
     req.session.user = user;
     req.session.authorized = true;
     res.json({ message: "login successful!" });  //<-- eventually we can change this to render the user template
+    res.render('/username')
   });
 
   
@@ -38,6 +39,8 @@ router.post("/user-login", async (req, res) => {
         password,
       });
       res.json(newUser);
+     
+
     } catch (e) {
       console.log(e);
       res.status(500).json({
@@ -84,6 +87,14 @@ router.post("/user-login", async (req, res) => {
       },
     });
     res.json(deletedUser);
+  });
+
+  router.get("/login", (req, res) => {
+    res.render("login");
+  });
+
+  router.get("/register", (req, res) => {
+    res.render("register");
   });
 
   module.exports = router;
