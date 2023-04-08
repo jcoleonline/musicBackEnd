@@ -1,5 +1,7 @@
 'use strict';
 
+const artist = require('../models/artist');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -9,7 +11,7 @@ module.exports = {
           name: 'nf',
           genre: 'rap',
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         }
       ],
       {});

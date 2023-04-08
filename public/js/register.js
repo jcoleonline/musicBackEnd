@@ -16,8 +16,8 @@ form.addEventListener("submit", async (event) => {
             body: JSON.stringify(register),
         });
         const data = await response.json();
-        if (data.message === 'success') {
-            window.location.replace('/login');
+        if (data.username) {
+            window.location.replace('/users');
         }
     } catch (error) {
         console.error('Error:', error);
