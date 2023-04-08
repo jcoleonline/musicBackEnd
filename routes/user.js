@@ -17,15 +17,20 @@ router.post("/user-login", async (req, res) => {
         username,
       },
     });
+    
   
-    const matchedPassword = await bcrypt.compare(password, user.password);
-    if (!matchedPassword) {
-      res.status(500).json({ message: "Invalid username or password" });
-    }
-    req.session.user = user;
+    bcrypt.compare(password, user.password,(error,result)=>{
+      if(result){
+        req.session.user = user;
     req.session.authorized = true;
     res.json({ message: "login successful!" });  //<-- eventually we can change this to render the user template
-    res.render('/username')
+    res.render('home')
+      } else {
+      res.status(500).json({ message: "Invalid username or password" });
+
+      }
+
+    });
   });
 
   
@@ -39,7 +44,7 @@ router.post("/user-login", async (req, res) => {
         password,
       });
       res.json(newUser);
-     
+      
 
     } catch (e) {
       console.log(e);
