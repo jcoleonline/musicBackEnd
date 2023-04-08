@@ -1,0 +1,18 @@
+.loginBox {
+    display: flex;
+    max-width: 300px;
+    justify-content: center;
+    margin: auto;
+    margin-top: 100;
+    background: rgb(186, 184, 184);
+    padding: 10;
+    border-radius: 10%;
+    -webkit-box-shadow: 5px 1px 12px 0px rgba(0,0,0,0.48); 
+box-shadow: 5px 1px 12px 0px rgba(0,0,0,0.48);
+};
+
+.tophead {
+    color: gray;
+    -webkit-box-shadow: 5px 1px 12px 0px rgba(0,0,0,0.48); 
+    box-shadow: 5px 1px 12px 0px rgba(0,0,0,0.48);
+};
