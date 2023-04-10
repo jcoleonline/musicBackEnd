@@ -1,4 +1,6 @@
 const form = document.getElementById('loginForm')
+const username = document.getElementById('username')
+const password = document.getElementById('Password')
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -6,6 +8,7 @@ form.addEventListener("submit", async (event) => {
         username: username.value,
         password: password.value,
     }
+    console.log(login)
     try {
         const response = await fetch('/user-login', {
             method: 'POST',
@@ -14,11 +17,15 @@ form.addEventListener("submit", async (event) => {
             },
             body: JSON.stringify(login),
         });
-        const data = await response.json();
-        if (data.username) {
-            window.location.replace('/user/:id');
-        }
+        // const data = await response.json();
+        // console.log(data)
+        // if (data.username) {
+        //     console.log(test)
+            window.location.replace('/');
+        //     console.log()
+        // }
     } catch (error) {
         console.error('Error:', error);
     }
+
 });
