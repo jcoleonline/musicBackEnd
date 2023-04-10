@@ -12,25 +12,28 @@ router.get("/", (req, res) => {
 
 router.post("/user-login", async (req, res) => {
     const { username, password } = req.body;
+    console.log(req.body)
     const user = await User.findOne({
       where: {
         username,
+        // password,
       },
     });
+    console.log(user)
+    if (user) {
+
     
   
-    bcrypt.compare(password, user.password,(error,result)=>{
+    const result= bcrypt.compare(password, user.password)
       if(result){
         req.session.user = user;
     req.session.authorized = true;
-    res.json({ message: "login successful!" });  //<-- eventually we can change this to render the user template
-    res.render('home')
+    res.render('/')
       } else {
       res.status(500).json({ message: "Invalid username or password" });
 
       }
-
-    });
+    }
   });
 
   
