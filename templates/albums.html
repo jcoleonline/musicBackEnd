@@ -15,10 +15,10 @@
         <a class="nav-link" href="http://127.0.0.1:3000/artists">Artist</a>
         <a class="nav-link" href="http://127.0.0.1:3000/login">Account</a>
       </nav>
-    <h1>user page</h1>
+    <h1>Album page</h1>
     <ul>
         ${Albums.map((album, index) => 
-        `<li>${album.name}</li>`
+        `<li><a href="/albums/${album.id}">${album.name}</a></li>`
         ).join('')}
     </ul>
     <nav class="navbar fixed-bottom author-href bg-body-tertiary">

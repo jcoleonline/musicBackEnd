@@ -18,7 +18,7 @@
     <h1>user page</h1>
     <ul>
         ${artists.map((artist, index) => 
-        `<li>${artist.name}</li>`
+        `<li><a href="/artists/${artist.id}">${artist.name}</a></li>`
         ).join('')}
     </ul>
     <nav class="navbar fixed-bottom author-href bg-body-tertiary">
