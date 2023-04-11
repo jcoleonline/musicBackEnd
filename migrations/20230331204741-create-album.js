@@ -18,6 +18,9 @@ module.exports = {
       year: {
         type: Sequelize.STRING
       },
+      imgurl: {
+        type: Sequelize.STRING
+      },
       artistId: {
         allowNull: false,
         type: Sequelize.INTEGER,
